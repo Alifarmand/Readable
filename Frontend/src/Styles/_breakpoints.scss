@@ -1,2 +1,25 @@
-$red: red;
-$white: white;
+$breakpoint-tiny: 320px;
+$breakpoint-small: 500px;
+$breakpoint-medium: 750px;
+$breakpoint-large: 960px;
+$breakpoint-huge: 1200px;
+$breakpoint-mega: 1400px;
+
+
+@mixin between($from: false, $to: false) {
+  @media (min-width: $from) and (max-width: $to - .0625) {
+    @content;
+  }
+}
+
+@mixin until($point) {
+  @media (max-width: $point - .0625) {
+    @content;
+  }
+}
+
+@mixin from($point) {
+  @media (min-width: $point) {
+    @content;
+  }
+}

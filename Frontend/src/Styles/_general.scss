@@ -1,10 +1,21 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 .App {
   text-align: center;
+  padding: 20px 20px;
+
+  @include from($breakpoint-medium) {
+    padding: 0 20px;
+  }
 }
 .App-header {
-  background: #4AC29A;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #BDFFF3, #4AC29A);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #BDFFF3, #4AC29A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #141E30;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
   max-width: 1160px;
   margin: 0 auto;
   padding: 20px;
@@ -15,39 +26,49 @@
     margin: 0 auto;
     text-align: left;
     font-weight: 300;
-    color: rgba($white, .5)
+    color: rgba($white, .3)
   }
 }
 
 .grid {
-  display: inline-grid;
-  grid-template-columns: 2fr 8fr;
+  display: grid;
+  grid-template-columns: 1fr;
   justify-content: space-between;
   width: 100%;
   max-width: 1200px;
   margin: 40px 0;
 
+  @include from($breakpoint-medium) {
+    display: inline-grid;
+    grid-template-columns: 2fr 8fr;
+  }
+
   &__categories {
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     color: $dark;
-    border-radius: 5px;
-    padding: 20px;
+    margin-bottom: 20px;
   }
 
   &__posts {
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    border: 1px solid blue;
-    margin: 0 0 0 40px;
+    margin: 0 auto;
+    width: 100%;
+
+    @include from($breakpoint-medium) {
+      margin-left: 40px;
+      width: calc(100% - 40px);
+    }
   }
 
   &__title {
-    margin-bottom: 40px;
+    text-align: left;
+    margin: 0 0 20px;
   }
 }
 
 .list {
   text-align: left;
-  padding: 0;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  border-radius: 5px;
 
   &__items {
     list-style-type: none;
@@ -67,11 +88,9 @@
       transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 
       &:hover {
-        background: #4AC29A;  /* fallback for old browsers */
-        background: -webkit-radial-gradient(circle, #BDFFF3, #4AC29A);  /* Chrome 10-25, Safari 5.1-6 */
-        background: radial-gradient(circle, #BDFFF3, #4AC29A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background-color: $greenLight;
         color: $dark;
-        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+        box-shadow: 0 7px 28px rgba(0,0,0,0.25), 0 5px 5px rgba(0,0,0,0.22);
       }
     }
   }

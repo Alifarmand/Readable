@@ -28,6 +28,14 @@ class App extends Component {
           </div>
           <div className='grid__posts'>
             <h2 className='grid__title'>Posts</h2>
+            <ul className='postList'>
+              <li className='postList__item'>
+                <div><p>Lorem ipsum and more of those things!</p></div>
+              </li>
+              <li className='postList__item'>2</li>
+              <li className='postList__item'>3</li>
+              <li className='postList__item'>4</li>
+            </ul>
           </div>
         </div >
       </div >
