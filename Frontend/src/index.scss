@@ -1,10 +1,10 @@
-@import 'scss/_breakpoints.scss';
-@import "scss/_general.scss";
+@import 'Styles/_breakpoints.scss';
+@import "Styles/_colors.scss";
+@import "Styles/_general.scss";
+
 
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
-  background-color: $red;
-  color: $white;
+  font-family: 'Lato', sans-serif;
 }

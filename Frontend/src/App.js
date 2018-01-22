@@ -1,19 +1,38 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react'
+import Navigation from './Components/navbar'
+//import { Route } from 'react-router-dom'
 class App extends Component {
-  render() {
+
+  state = {
+    pages: {
+      root: '/',
+      category: '/category',
+    },
+  }
+
+  render () {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
+      <div className='App' >
+        <header className='App-header' >
+          <Navigation />
+        </header >
+        <div className='grid' >
+          <div className='grid__categories'>
+            <h2 className='grid__title'>Categories</h2>
+            <ul className='list'>
+              <li className='list__items'><a href='' >All Posts</a ></li>
+              <li className='list__items'><a href='' >React</a ></li>
+              <li className='list__items'><a href='' >Redux</a ></li>
+              <li className='list__items'><a href='' >Udacity</a ></li>
+            </ul>
+          </div>
+          <div className='grid__posts'>
+            <h2 className='grid__title'>Posts</h2>
+          </div>
+        </div >
+      </div >
+    )
   }
 }
 
-export default App;
+export default App
