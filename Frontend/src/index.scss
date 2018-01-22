@@ -1,11 +1,6 @@
 @import 'Styles/_breakpoints.scss';
 @import "Styles/_colors.scss";
 @import "Styles/_general.scss";
+@import "Styles/_grid.scss";
+@import "Styles/_category.scss";
 @import "Styles/_posts.scss";
-
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Lato', sans-serif;
-}

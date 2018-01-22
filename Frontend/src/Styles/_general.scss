@@ -3,6 +3,12 @@
   padding: 0;
 }
 
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Lato', sans-serif;
+}
+
 .App {
   text-align: center;
   padding: 20px 20px;
@@ -30,68 +36,3 @@
   }
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 1200px;
-  margin: 40px 0;
-
-  @include from($breakpoint-medium) {
-    display: inline-grid;
-    grid-template-columns: 2fr 8fr;
-  }
-
-  &__categories {
-    color: $dark;
-    margin-bottom: 20px;
-  }
-
-  &__posts {
-    margin: 0 auto;
-    width: 100%;
-
-    @include from($breakpoint-medium) {
-      margin-left: 40px;
-      width: calc(100% - 40px);
-    }
-  }
-
-  &__title {
-    text-align: left;
-    margin: 0 0 20px;
-  }
-}
-
-.list {
-  text-align: left;
-  padding: 20px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  border-radius: 5px;
-
-  &__items {
-    list-style-type: none;
-    width: 100%;
-    margin: 20px auto;
-
-    a {
-      text-decoration: none;
-      display: block;
-      padding: 15px 20px 15px 20px;
-      font-weight: 100;
-      color: $white;
-      border-radius: 5px;
-      text-align: left;
-      background-color: $light;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-      transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-
-      &:hover {
-        background-color: $greenLight;
-        color: $dark;
-        box-shadow: 0 7px 28px rgba(0,0,0,0.25), 0 5px 5px rgba(0,0,0,0.22);
-      }
-    }
-  }
-}

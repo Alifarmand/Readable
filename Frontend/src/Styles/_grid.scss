@@ -1,0 +1,33 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+  margin: 40px 0;
+
+  @include from($breakpoint-medium) {
+    display: inline-grid;
+    grid-template-columns: 2fr 8fr;
+  }
+
+  &__categories {
+    color: $dark;
+    margin-bottom: 20px;
+  }
+
+  &__posts {
+    margin: 0 auto;
+    width: 100%;
+
+    @include from($breakpoint-medium) {
+      margin-left: 40px;
+      width: calc(100% - 40px);
+    }
+  }
+
+  &__title {
+    text-align: left;
+    margin: 0 0 20px;
+  }
+}
