@@ -10,7 +10,7 @@ const initialState = {
   sortBy: {}
 }
 
-export function postReducer (state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case POST_REMOVE:
       return state.posts.filter

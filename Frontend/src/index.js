@@ -1,18 +1,20 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
-import { createStore } from 'redux'
-import { postReducer } from './Reducers/post_reducer'
+import { createStore, applyMiddleware, compose } from 'redux'
+import thunk from 'redux-thunk'
+import allReducers from './Reducers/index'
 import { Provider } from 'react-redux'
 import './index.css'
 import App from './App'
 import registerServiceWorker from './registerServiceWorker'
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const store = createStore(
-  postReducer,
-  //This makes the redux tab available in the console
-  window.__REDUX_DEVTOOLS_EXTENSION__ &&
-  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__())
+  allReducers,
+  composeEnhancers(
+    applyMiddleware(thunk)
+  ))
 
 ReactDOM.render(
   <BrowserRouter >

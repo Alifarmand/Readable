@@ -35,7 +35,7 @@ body {
   justify-content: space-between;
   width: 100%;
   max-width: 1200px;
-  margin: 40px 0; }
+  margin: 10px 0 100px; }
   @media (min-width: 750px) {
     .grid {
       display: inline-grid;
@@ -52,18 +52,42 @@ body {
         width: calc(100% - 40px); } }
   .grid__title {
     text-align: left;
-    margin: 0 0 20px;
-    color: rgba(31, 45, 61, 0.4); }
+    margin: 0 0 20px; }
+  .grid__header {
+    display: grid;
+    grid-template-columns: 9fr 150px;
+    align-items: center; }
+    .grid__header__title {
+      text-align: left;
+      margin: 0 0 20px;
+      color: rgba(31, 45, 61, 0.4); }
+    .grid__header__button {
+      border: 0;
+      padding: 10px 0;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+      color: #F1F5F5;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      background: #F2994A;
+      /* fallback for old browsers */
+      background: -webkit-linear-gradient(to left, #F2C94C, #F2994A);
+      /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(to left, #F2C94C, #F2994A);
+      /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ }
+      .grid__header__button:hover {
+        color: rgba(31, 45, 61, 0.5);
+        box-shadow: 0 7px 28px rgba(0, 0, 0, 0.25), 0 5px 5px rgba(0, 0, 0, 0.22);
+        cursor: pointer; }
 
 .list {
-  text-align: left;
-  padding: 20px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  border-radius: 5px; }
+  text-align: left; }
   .list__items {
     list-style-type: none;
     width: 100%;
-    margin: 20px auto; }
+    margin: 5px auto; }
     .list__items a {
       text-decoration: none;
       display: block;
@@ -71,14 +95,11 @@ body {
       font-weight: 100;
       color: #F1F5F5;
       border-radius: 5px;
-      text-align: left;
+      text-align: center;
       background-color: #506073;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
       transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
       .list__items a:hover {
-        background-color: #9BB9DE;
-        color: #1F2D3D;
-        box-shadow: 0 7px 28px rgba(0, 0, 0, 0.25), 0 5px 5px rgba(0, 0, 0, 0.22); }
+        background-color: rgba(80, 96, 115, 0.8); }
 
 .postList {
   display: grid;
@@ -89,13 +110,10 @@ body {
     list-style-type: none;
     text-align: left;
     margin: 10px 0;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    border-radius: 5px; }
+    border-radius: 5px;
+    border: 1px solid Gainsboro; }
     .postList__item:first-child {
       margin: 0 0 10px; }
-    .postList__item:hover {
-      box-shadow: 0 7px 28px rgba(0, 0, 0, 0.25), 0 5px 5px rgba(0, 0, 0, 0.22); }
 
 .post {
   border-radius: 5px;
@@ -114,9 +132,12 @@ body {
       width: 50%; }
   .post__body {
     margin: 40px 20px; }
+    .post__body__headline {
+      font-weight: bold;
+      margin-bottom: 10px; }
     .post__body__content {
       font-weight: 300;
-      color: #1F2D3D; }
+      color: rgba(31, 45, 61, 0.8); }
   .post__footer {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -129,17 +150,19 @@ body {
       grid-template-columns: 50px 50px 50px;
       align-items: center;
       text-align: left; }
+      .post__footer__left p {
+        opacity: .5; }
       .post__footer__left small {
-        opacity: .5;
         font-style: italic; }
     .post__footer__right {
       display: grid;
       grid-template-columns: 3fr 70px;
       align-items: center;
       justify-items: right; }
+      .post__footer__right p {
+        opacity: .5; }
       .post__footer__right small {
         margin-right: 20px;
-        opacity: .5;
         font-style: italic; }
   .post__comment {
     width: calc(100% - 40px);
@@ -155,26 +178,74 @@ body {
   margin-right: 5px;
   transition: all .2s; }
   .icons:hover {
-    background-color: #506073;
+    background-color: #1F2D3D;
     color: #F1F5F5;
     cursor: pointer; }
 
 .button {
-  padding: 5px 20px 10px 20px;
+  padding: 2.5px 10px 7.5px 10px;
   border: none;
   font-weight: 100;
   color: #F1F5F5;
   border-radius: 5px;
   text-align: center;
-  background-color: #506073;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  font-size: 2rem; }
+  font-size: 1.5rem;
+  background: #F2994A;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #F2C94C, #F2994A);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #F2C94C, #F2994A);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ }
   .button:hover {
     background-color: #9BB9DE;
-    color: #1F2D3D;
+    color: rgba(31, 45, 61, 0.5);
     box-shadow: 0 7px 28px rgba(0, 0, 0, 0.25), 0 5px 5px rgba(0, 0, 0, 0.22);
     cursor: pointer; }
 
 .iconHelper {
   margin: 0 5px; }
+
+.send {
+  margin-top: -5px; }
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+  margin: 0 auto; }
+  .form__label {
+    color: rgba(31, 45, 61, 0.5); }
+  .form__item {
+    display: inline-grid;
+    grid-template-columns: 100px 1fr;
+    margin: 10px 0;
+    align-items: center; }
+    .form__item label {
+      text-align: left; }
+    .form__item input {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #F2994A; }
+  .form button {
+    background: #F2994A;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #F2C94C, #F2994A);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #F2C94C, #F2994A);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    font-size: 2em;
+    border-radius: 5px;
+    padding: 5px 8px 5px 10px;
+    width: 100px;
+    margin: 10px 0 0 auto;
+    cursor: pointer;
+    color: #F1F5F5;
+    border: none;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
+    .form button:hover {
+      color: rgba(31, 45, 61, 0.5);
+      box-shadow: 0 7px 28px rgba(0, 0, 0, 0.25), 0 5px 5px rgba(0, 0, 0, 0.22); }

@@ -1,33 +1,44 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Navigation from './Components/navbar'
+import Categories from './Components/categories'
 import ThumbsUp from 'react-icons/lib/fa/thumbs-up'
 import ThumbsDown from 'react-icons/lib/fa/thumbs-down'
 import Clock from 'react-icons/lib/fa/clock-o'
 import Comment from 'react-icons/lib/md/comment'
+import Add from 'react-icons/lib/md/add'
+import Send from 'react-icons/lib/md/send'
+import ModalGeneral from './Components/modal'
 
 //import { Route } from 'react-router-dom'
 class App extends Component {
+  state = {
+    open: false,
+  }
+  onOpenModal = () => {
+    this.setState({open: true})
+  }
+
+  onCloseModal = () => {
+    this.setState({open: false})
+  }
 
   render () {
     console.log(this.props.name)
     return (
       <div className='App' >
+        <ModalGeneral open={this.state.open} closeModal={this.onCloseModal} />
         <header className='App-header' >
           <Navigation />
         </header >
         <div className='grid' >
-          <div className='grid__categories' >
-            <h2 className='grid__title' >Categories</h2 >
-            <ul className='list' >
-              <li className='list__items' ><a href='' >All Posts</a ></li >
-              <li className='list__items' ><a href='' >React</a ></li >
-              <li className='list__items' ><a href='' >Redux</a ></li >
-              <li className='list__items' ><a href='' >Udacity</a ></li >
-            </ul >
-          </div >
+          <Categories />
           <div className='grid__posts' >
-            <h2 className='grid__title' >Posts</h2 >
+            <div className='grid__header' >
+              <h2 className='grid__header__title' >Posts</h2 >
+              <button className='grid__header__button'
+                      onClick={this.onOpenModal} >Create Post <Add /></button >
+            </div >
             <ul className='postList' >
               <li className='postList__item' >
                 <div className='post' >
@@ -39,6 +50,8 @@ class App extends Component {
                     </p >
                   </div >
                   <div className='post__body' >
+                    <h2 className='post__body__headline' >This will be the title
+                      of the shit</h2 >
                     <p className='post__body__content' >Lorem Ipsum is simply
                       dummy text of the printing and typesetting industry. Lorem
                       Ipsum has been the industry's standard dummy text ever
@@ -63,23 +76,21 @@ class App extends Component {
                     </div >
                   </div >
                   <div className='post__comment' >
-                    <div >
-                      <label className='form__label' >
-                        Name:
+                    <form action='' className='form' >
+                      <div className='form__item' >
+                        <label className='form__label' >Name:</label >
                         <input type='text'
                                ref={(input) => this.input = input}
                                onChange={(event) => this.nameChange(event)} />
-                      </label >
-                    </div >
-                    <div >
-                      <label className='form__label' >
-                        Name:
+                      </div >
+                      <div className='form__item' >
+                        <label className='form__label' >Comment:</label >
                         <input type='text'
                                ref={(input) => this.input = input}
                                onChange={(event) => this.nameChange(event)} />
-                      </label >
-                      <p >button</p >
-                    </div >
+                      </div >
+                      <button ><Send className='send' /></button >
+                    </form >
                   </div >
                 </div >
               </li >
@@ -94,10 +105,9 @@ class App extends Component {
   }
 }
 
-
-function mapStateToProps() {
+function mapStateToProps () {
   return {
-    name: 'Faggot!'
+    name: 'Faggot!',
   }
 }
 

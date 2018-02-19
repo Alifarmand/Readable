@@ -1,0 +1,47 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+
+  &__label {
+    color: rgba($dark, .5);
+  }
+
+  &__item {
+    display: inline-grid;
+    grid-template-columns: 100px 1fr;
+    margin: 10px 0;
+    align-items: center;
+
+    label {
+      text-align: left;
+    }
+
+    input {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #F2994A;
+    }
+  }
+
+  button {
+    @include gradientBackground();
+    font-size: 2em;
+    border-radius: 5px;
+    padding: 5px 8px 5px 10px;
+    width: 100px;
+    margin: 10px 0 0 auto;
+    cursor: pointer;
+    color: $white;
+    border: none;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+
+    &:hover {
+      color: rgba($dark, .5);
+      box-shadow: 0 7px 28px rgba(0, 0, 0, 0.25), 0 5px 5px rgba(0, 0, 0, 0.22);
+    }
+  }
+}
