@@ -23,11 +23,16 @@ body {
   padding: 20px;
   color: white;
   border-radius: 5px; }
+  .App-header a {
+    text-decoration: none; }
   .App-header h1 {
     margin: 0 auto;
     text-align: center;
     font-weight: 300;
-    color: rgba(241, 245, 245, 0.3); }
+    color: rgba(241, 245, 245, 0.3);
+    transition: color .3s; }
+    .App-header h1:hover {
+      color: #F2994A; }
 
 .grid {
   display: grid;
@@ -69,6 +74,7 @@ body {
       margin-bottom: 10px;
       font-size: 1.1rem;
       color: #F1F5F5;
+      text-decoration: none;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
       transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
       background: #F2994A;
@@ -82,12 +88,32 @@ body {
         box-shadow: 0 7px 28px rgba(0, 0, 0, 0.25), 0 5px 5px rgba(0, 0, 0, 0.22);
         cursor: pointer; }
 
+.filter {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px; }
+  .filter button {
+    border: none;
+    background-color: #1F2D3D !important;
+    padding: 10px 5px;
+    font-size: 1.15em;
+    color: rgba(241, 245, 245, 0.5);
+    border-radius: 5px;
+    cursor: pointer; }
+    .filter button:hover {
+      color: rgba(242, 153, 74, 0.8); }
+    .filter button svg {
+      margin-top: -4px;
+      margin-right: 10px;
+      color: rgba(241, 245, 245, 0.5); }
+
 .list {
   text-align: left; }
   .list__items {
     list-style-type: none;
     width: 100%;
-    margin: 5px auto; }
+    margin: 5px auto;
+    text-transform: capitalize; }
     .list__items a {
       text-decoration: none;
       display: block;
@@ -101,6 +127,17 @@ body {
       .list__items a:hover {
         background-color: rgba(80, 96, 115, 0.8); }
 
+.spinner {
+  position: relative;
+  width: 100%;
+  height: 150px;
+  text-align: center;
+  margin: 30px auto 0; }
+  .spinner > div {
+    position: absolute;
+    top: calc(50% - 20px);
+    left: calc(50% - 10px); }
+
 .postList {
   display: grid;
   padding: 0; }
@@ -109,11 +146,9 @@ body {
     display: flex;
     list-style-type: none;
     text-align: left;
-    margin: 10px 0;
+    margin-bottom: 10px;
     border-radius: 5px;
     border: 1px solid Gainsboro; }
-    .postList__item:first-child {
-      margin: 0 0 10px; }
 
 .post {
   border-radius: 5px;
@@ -127,11 +162,16 @@ body {
     .post__header__name {
       text-align: left;
       width: 50%; }
+      .post__header__name .link {
+        color: #506073; }
     .post__header__time {
       text-align: right;
       width: 50%; }
   .post__body {
     margin: 40px 20px; }
+    .post__body a {
+      text-decoration: none;
+      color: #1F2D3D; }
     .post__body__headline {
       font-weight: bold;
       margin-bottom: 10px; }
@@ -142,29 +182,35 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     background-color: rgba(220, 220, 220, 0.3);
-    padding: 20px; }
+    padding: 10px 20px; }
     .post__footer p {
       font-style: italic; }
     .post__footer__left {
       display: grid;
-      grid-template-columns: 50px 50px 50px;
+      grid-template-columns: 70px 50px 50px;
       align-items: center;
       text-align: left; }
       .post__footer__left p {
-        opacity: .5; }
+        opacity: .5;
+        margin-right: 7px; }
       .post__footer__left small {
         font-style: italic; }
     .post__footer__right {
-      display: grid;
-      grid-template-columns: 3fr 70px;
+      display: inline-grid;
       align-items: center;
       justify-items: right; }
       .post__footer__right p {
         opacity: .5; }
       .post__footer__right small {
-        margin-right: 20px;
         font-style: italic; }
+    .post__footer__actions {
+      text-align: right; }
+      .post__footer__actions .button {
+        margin-left: 10px; }
   .post__comment {
+    background: #141E30;
+    background: -webkit-linear-gradient(to left, #243B55, #141E30);
+    background: linear-gradient(to left, #243B55, #141E30);
     width: calc(100% - 40px);
     padding: 20px;
     display: flex;
@@ -189,8 +235,6 @@ body {
   color: #F1F5F5;
   border-radius: 5px;
   text-align: center;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   font-size: 1.5rem;
   background: #F2994A;
   /* fallback for old browsers */
@@ -201,8 +245,25 @@ body {
   .button:hover {
     background-color: #9BB9DE;
     color: rgba(31, 45, 61, 0.5);
-    box-shadow: 0 7px 28px rgba(0, 0, 0, 0.25), 0 5px 5px rgba(0, 0, 0, 0.22);
     cursor: pointer; }
+
+.shadow {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+  .shadow:hover {
+    box-shadow: 0 7px 28px rgba(0, 0, 0, 0.25), 0 5px 5px rgba(0, 0, 0, 0.22); }
+
+.delete {
+  background: rgba(220, 40, 30, 0.2);
+  transition: background 0.3s; }
+  .delete:hover {
+    background: rgba(220, 40, 30, 0.8); }
+
+.edit {
+  background: rgba(131, 164, 212, 0.3);
+  transition: background 0.3s; }
+  .edit:hover {
+    background: #83a4d4; }
 
 .iconHelper {
   margin: 0 5px; }
@@ -210,14 +271,33 @@ body {
 .send {
   margin-top: -5px; }
 
+.postDetail {
+  margin-top: 10px;
+  width: calc(100%);
+  margin-left: 0; }
+  @media (min-width: 750px) {
+    .postDetail {
+      margin-top: 50px;
+      width: calc(100% - 40px);
+      margin-left: 40px; } }
+
+.modalForm {
+  padding: 40px; }
+  .modalForm h2 {
+    text-align: center;
+    margin: 0 auto;
+    color: #F1F5F5;
+    margin-bottom: 20px; }
+
 .form {
   display: flex;
   flex-direction: column;
   width: 100%;
+  max-width: 500px;
   text-align: center;
   margin: 0 auto; }
   .form__label {
-    color: rgba(31, 45, 61, 0.5); }
+    color: rgba(255, 255, 255, 0.5); }
   .form__item {
     display: inline-grid;
     grid-template-columns: 100px 1fr;
@@ -225,10 +305,18 @@ body {
     align-items: center; }
     .form__item label {
       text-align: left; }
-    .form__item input {
+    .form__item select {
+      height: 40px;
+      line-height: 1;
+      text-transform: capitalize; }
+    .form__item input, .form__item textarea, .form__item select {
       padding: 10px;
       border-radius: 5px;
-      border: 1px solid #F2994A; }
+      border: 1px solid #F2994A;
+      background: #141E30;
+      background: -webkit-linear-gradient(to left, #243B55, #141E30);
+      background: linear-gradient(to left, #243B55, #141E30);
+      color: #F1F5F5; }
   .form button {
     background: #F2994A;
     /* fallback for old browsers */
@@ -249,3 +337,63 @@ body {
     .form button:hover {
       color: rgba(31, 45, 61, 0.5);
       box-shadow: 0 7px 28px rgba(0, 0, 0, 0.25), 0 5px 5px rgba(0, 0, 0, 0.22); }
+
+.custom-modal {
+  background: #141E30 !important;
+  background: -webkit-linear-gradient(to left, #243B55, #141E30) !important;
+  background: linear-gradient(to left, #243B55, #141E30) !important;
+  width: 90vw;
+  max-width: 600px !important; }
+  @media (min-width: 960px) {
+    .custom-modal {
+      width: 80vw; } }
+  @media (min-width: 1200px) {
+    .custom-modal {
+      width: 60vw; } }
+  .custom-modal svg {
+    fill: rgba(241, 245, 245, 0.5) !important;
+    transition: fill 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+    .custom-modal svg:hover {
+      fill: #F2994A !important; }
+
+.comment {
+  text-align: left; }
+  .comment:last-child {
+    margin-bottom: 0;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px; }
+  .comment__body {
+    padding: 20px; }
+  .comment__footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: rgba(31, 45, 61, 0.3);
+    padding: 5px 15px 5px 20px; }
+    .comment__footer p {
+      font-style: italic; }
+    .comment__footer__left {
+      display: grid;
+      grid-template-columns: 60px 40px 40px;
+      align-items: center;
+      text-align: left; }
+      .comment__footer__left p {
+        opacity: .5; }
+      .comment__footer__left small {
+        font-style: italic; }
+    .comment__footer__right {
+      display: inline-grid;
+      align-items: center;
+      grid-template-columns: 1fr 40px 40px;
+      text-align: right; }
+      .comment__footer__right .commentBy {
+        opacity: .2;
+        margin-right: 10px; }
+      .comment__footer__right small {
+        font-style: italic; }
+      .comment__footer__right .button {
+        transform: scale(0.7);
+        text-align: right;
+        margin: 0 auto; }
+
+.small {
+  transform: scale(0.8); }

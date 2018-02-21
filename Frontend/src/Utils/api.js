@@ -1,238 +1,153 @@
-import uuid from 'uuid';
+export const API = 'http://localhost:3001'
+let token = localStorage.token
 
-export class Api {
-  /**
-   * auth token required by api
-   * @type {string | null}
-   */
-  token = null;
-  /**
-   * default headers for api
-   * @type {object | null}
-   */
-  headers = null;
-  /**
-   * base url for api
-   * @type {string | null}
-   */
-  url = null;
-
-  /**
-   * GET /categories
-   * @return {Promise<any>}
-   */
-  getAllCategories = () => {
-    return fetch(`${this.url}/categories`, { headers: this.headers })
-    .then(response => response.json())
-    .then(data => data.categories);
-  };
-
-  /**
-   * GET /:category/posts
-   * @param category
-   * @return {Promise<any>}
-   */
-  getAllPostsForCategory = category =>
-    fetch(`${this.url}/${category}/posts`, { headers: this.headers })
-    .then(response => response.json())
-    .then(data => data);
-
-  /**
-   * GET /posts
-   * @return {Promise<any>}
-   */
-  getAllPosts = () =>
-    fetch(`${this.url}/posts`, { headers: this.headers }).then(response =>
-      response.json()
-    );
-
-  /**
-   * POST /posts
-   * @param {object} post
-   * @param {string} post.id UUID - should be fine, but any unique id will work
-   * @param {number} post.timestamp - timestamp in whatever format you like, you can use Date.now() if you like
-   * @param {string} post.title -
-   * @param {string} post.body -
-   * @param {string} post.author -
-   * @param {string} post.category - Any of the categories listed in api-server/categories.js. Feel free to extend this list as you desire.
-   * @return {Promise<any>}
-   */
-  createPost = post => {
-    post.id = uuid();
-    post.timestamp = Date.now();
-    return fetch(`${this.url}/posts`, {
-      method: 'POST',
-      headers: {
-        ...this.headers,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(post)
-    }).then(data => data.json());
-  };
-
-  /**
-   * PUT /posts/:id
-   * @param id
-   * @param {object} post
-   * @param {string} post.id UUID - should be fine, but any unique id will work
-   * @param {number} post.timestamp - timestamp in whatever format you like, you can use Date.now() if you like
-   * @param {string} post.title -
-   * @param {string} post.body -
-   * @param {string} post.author -
-   * @param {string} post.category - Any of the categories listed in api-server/categories.js. Feel free to extend this list as you desire.
-   * @return {Promise<any>}
-   */
-  editPost = (id, post) =>
-    fetch(`${this.url}/posts/${id}`, {
-      method: 'PUT',
-      headers: {
-        ...this.headers,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(post)
-    }).then(data => data.json());
-
-  /**
-   * GET /posts/:id
-   * @param id
-   * @return {Promise<any>}
-   */
-  getPost = id =>
-    fetch(`${this.url}/posts/${id}`, { headers: this.headers }).then(response =>
-      response.json()
-    );
-
-  /**
-   * POST /posts/:id
-   * @param id
-   * @param {string} option possible values "upVote" or "downVote"
-   * @return {Promise<any>}
-   */
-  votePost = (id, option) =>
-    fetch(`${this.url}/posts/${id}`, {
-      method: 'POST',
-      headers: {
-        ...this.headers,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        option: option
-      })
-    }).then(data => data.json());
-
-  /**
-   * DELETE /posts/:id
-   * @param id
-   * @return {Promise<Response>}
-   */
-  deletePost = id =>
-    fetch(`${this.url}/posts/${id}`, {
-      method: 'DELETE',
-      headers: this.headers
-    });
-
-  /**
-   * GET /posts/:id/comments
-   * @param id
-   * @return {Promise<any>}
-   */
-  getComments = id =>
-    fetch(`${this.url}/posts/${id}/comments`, { headers: this.headers }).then(
-      response => response.json()
-    );
-
-  /**
-   * POST /comments
-   * @param {object} comment
-   * @param {string} comment.id - Any unique ID. As with posts, UUID is probably the best here.
-   * @param {number} comment.timestamp - Get this however you want.
-   * @param {string} comment.body - String
-   * @param {string} comment.author - String
-   * @param {string} comment.parentId - Should match a post id in the database.
-   * @return {Promise<any>}
-   */
-  addComment = comment => {
-    comment.id = uuid();
-    comment.timestamp = Date.now();
-    return fetch(`${this.url}/comments`, {
-      method: 'POST',
-      headers: {
-        ...this.headers,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(comment)
-    }).then(data => data.json());
-  };
-
-  /**
-   * DELETE /comments/:id
-   * @param id
-   * @return {Promise<any>}
-   */
-  deleteComment = id =>
-    fetch(`${this.url}/comments/${id}`, {
-      method: 'DELETE',
-      headers: this.headers
-    }).then(data => data.json());
-
-  /**
-   * PUT /comments/:id
-   * @param id
-   * @param {object} comment
-   * @param {string} comment.body - String
-   * @return {Promise<any>}
-   */
-  editComment = (id, comment) => {
-    comment.timestamp = Date.now();
-    return fetch(`${this.url}/comments/${id}`, {
-      method: 'PUT',
-      headers: {
-        ...this.headers,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(comment)
-    }).then(data => data.json());
-  };
-
-  /**
-   * POST /comments/:id
-   * @param id
-   * @param {string} option possible values "upVote" or "downVote"
-   * @return {Promise<any>}
-   */
-  voteComment = (id, option) =>
-    fetch(`${this.url}/comments/${id}`, {
-      method: 'POST',
-      headers: {
-        ...this.headers,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        option: option
-      })
-    }).then(data => data.json());
-
-  /**
-   * @param {string} url
-   */
-  constructor(url, token) {
-    this.url = url;
-    this.token = token;
-    this.headers = {
-      Accept: 'application/json',
-      Authorization: this.token
-    };
-  }
+//Generating token
+if (!token){
+  token = localStorage.token = Math.random().toString(36).substr(-8)
 }
 
-const url = process.env.API_URL || 'http://localhost:3001';
-let token = localStorage.token;
-if (!token) {
-  token = localStorage.token = Math.random()
-  .toString(36)
-  .substr(-8);
+//Standard header with token
+export const headers = {
+  'Accept': 'application/json',
+  'Authorization': token,
+  'Content-Type': 'application/json'
+}
+/**
+ * Get categories
+ * @returns {Promise<any>}
+ */
+export const fetchCategories = () => {
+  return fetch(`${API}/categories`, { headers }).then(res => res.json())
+}
+/**
+ * Get a comment with postID
+ * @param parentId
+ * @returns {Promise<any>}
+ */
+export const fetchComment = (parentId) => {
+  return fetch(`${API}/posts/${parentId}/comments`, { headers })
+  .then(res => res.json())
+}
+/**
+ * Create comment
+ * @param comment
+ * @returns {Promise<any>}
+ */
+export const addComment = (comment) => {
+  return fetch(`${API}/comments`, {
+    method: 'POST',
+    headers: headers,
+    body: JSON.stringify(comment)
+  })
+  .then(res => res.json())
+}
+/**
+ * Delete comment
+ * @param commentId
+ * @returns {Promise<any>}
+ */
+export const deleteComment = (commentId) => {
+  return fetch(`${API}/comments/${commentId}`, {
+    method: 'DELETE',
+    headers: headers
+  })
+  .then(res => res.json())
+}
+/**
+ * Up or Downvote comment
+ * @param commentId
+ * @param option
+ * @returns {Promise<any>}
+ */
+export const voteComment = (commentId, option) => {
+  return fetch(`${API}/comments/${commentId}`, {
+    method: 'POST',
+    headers: headers,
+    body: JSON.stringify({ option })
+  })
+  .then(res => res.json())
+}
+/**
+ * Update comment
+ * @param commentId
+ * @param timestamp
+ * @param body
+ * @returns {Promise<any>}
+ */
+export const updateComment = (commentId, timestamp, body) => {
+  return fetch(`${API}/comments/${commentId}`, {
+    method: 'PUT',
+    headers: headers,
+    body: JSON.stringify({ timestamp: timestamp, body: body })
+  })
+  .then(res => res.json())
+}
+/**
+ * Get posts
+ * @returns {Promise<any>}
+ */
+export const fetchPosts = () => {
+  return fetch(`${API}/posts`, { headers })
+  .then(res => res.json())
+}
+/**
+ * Get category based posts
+ * @param category
+ * @returns {Promise<any>}
+ */
+export const fetchPostsByCategory = (category) => {
+  return fetch(`${API}/${category}/posts`, { headers })
+  .then(res => res.json())
+}
+/**
+ * Add post
+ * @param post
+ * @returns {Promise<Response>}
+ */
+export const addPost = (post) => {
+  return fetch(`${API}/posts`, {
+    method: 'POST',
+    headers: headers,
+    body: JSON.stringify(post)
+  })
+}
+/**
+ * Update current post with content
+ * @param postId
+ * @param title
+ * @param body
+ * @returns {Promise<any>}
+ */
+export const updatePost = (postId, title, body) => {
+  return fetch(`${API}/posts/${postId}`, {
+    method: 'PUT',
+    headers: headers,
+    body: JSON.stringify({ title: title, body: body })
+  })
+  .then(res => res.json())
+}
+/**
+ * Delete post with id
+ * @param postId
+ * @returns {Promise<any>}
+ */
+export const deletePost = (postId) => {
+  return fetch(`${API}/posts/${postId}`, {
+    method: 'DELETE',
+    headers: headers
+  }).then(res => res.json())
 }
 
-const api = new Api(url, token);
-
-export default api;
+/**
+ * New numbers of post
+ * @param postId
+ * @param option
+ * @returns {Promise<any>}
+ */
+export const votePost = (postId, option) => {
+  return fetch(`${API}/posts/${postId}`, {
+    method: 'POST',
+    headers: headers,
+    body: JSON.stringify({ option })
+  }).then(res => res.json())
+}

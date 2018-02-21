@@ -1,12 +1,17 @@
-import { FETCH_CAT } from '../Actions/categories'
+import * as Types from '../Actions/actionTypes'
 
-const INITIAL_STATE = {}
-
-export default function (state = INITIAL_STATE, action) {
-  switch (action.type) {
-    case FETCH_CAT:
-      return action.payload.categories
+/**
+ * Categories reducer
+ * @type {Array}
+ */
+const INITIAL_STATE = []
+function categories(state = INITIAL_STATE, action) {
+  switch(action.type) {
+    case Types.FETCH_CATEGORY:
+      return action.res.categories
     default:
       return state
   }
 }
+
+export default categories

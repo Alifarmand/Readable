@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "react-redux-form": "^1.16.5",
-    "react-responsive-modal": "^2.0.0"
-  }
-}

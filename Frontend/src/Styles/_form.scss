@@ -1,12 +1,24 @@
+.modalForm {
+  padding: 40px;
+
+  h2 {
+    text-align: center;
+    margin: 0 auto;
+    color: $white;
+    margin-bottom: 20px;
+  }
+}
+
 .form {
   display: flex;
   flex-direction: column;
   width: 100%;
+  max-width: 500px;
   text-align: center;
   margin: 0 auto;
 
   &__label {
-    color: rgba($dark, .5);
+    color: rgba(white, .5);
   }
 
   &__item {
@@ -19,10 +31,18 @@
       text-align: left;
     }
 
-    input {
+    select {
+      height: 40px;
+      line-height: 1;
+      text-transform: capitalize;
+    }
+
+    input, textarea, select {
       padding: 10px;
       border-radius: 5px;
-      border: 1px solid #F2994A;
+      border: 1px solid $orange;
+      @include darkGradient();
+      color: $white;
     }
   }
 
@@ -42,6 +62,32 @@
     &:hover {
       color: rgba($dark, .5);
       box-shadow: 0 7px 28px rgba(0, 0, 0, 0.25), 0 5px 5px rgba(0, 0, 0, 0.22);
+    }
+  }
+}
+
+
+.custom-modal {
+  background: #141E30 !important;
+  background: -webkit-linear-gradient(to left, #243B55, #141E30) !important;
+  background: linear-gradient(to left, #243B55, #141E30) !important;
+  width: 90vw;
+  max-width: 600px !important;
+
+  @include from($breakpoint-large) {
+    width: 80vw;
+  }
+
+  @include from($breakpoint-huge) {
+    width: 60vw;
+  }
+
+  svg {
+    fill: rgba($white, .5) !important;
+    transition: fill 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+    &:hover {
+      fill: $orange!important;
     }
   }
 }
