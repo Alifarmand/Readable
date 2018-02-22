@@ -198,11 +198,16 @@ body {
     .post__footer__right {
       display: inline-grid;
       align-items: center;
+      grid-template-columns: 1fr 40px 40px;
       justify-items: right; }
+      .post__footer__right button {
+        transform: scale(0.8);
+        margin: 0 0 0 auto; }
       .post__footer__right p {
         opacity: .5; }
       .post__footer__right small {
-        font-style: italic; }
+        font-style: italic;
+        margin-right: 5px; }
     .post__footer__actions {
       text-align: right; }
       .post__footer__actions .button {

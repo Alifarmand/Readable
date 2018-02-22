@@ -87,7 +87,13 @@
     &__right {
       display: inline-grid;
       align-items: center;
+      grid-template-columns: 1fr 40px 40px;
       justify-items: right;
+
+      button {
+        transform: scale(.8);
+        margin: 0 0 0 auto;
+      }
 
       p {
         opacity: .5;
@@ -95,6 +101,7 @@
 
       small {
         font-style: italic;
+        margin-right: 5px;
       }
     }
 

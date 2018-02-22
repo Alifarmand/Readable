@@ -21,5 +21,5 @@ Run the following commands to start the project:
 ### Having issues?
 
  Make sure that the server starts in `http://localhost:3000`<br />
- And make sure that the server running on another port<br />
- The project is listening to port `3001` where the server will run
+ And make sure that the backend is running on another port<br />
+ The project is listening to port `3001` where the backend will run

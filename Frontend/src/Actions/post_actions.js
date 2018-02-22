@@ -49,10 +49,11 @@ export const updatePost = (postId, title, body, callback) => {
  * @param callback
  * @returns {function(*)}
  */
-export const deletePost = (postId, callback) => {
+export const deletePost = (postId) => {
   return dispatch => {
-    API.deletePost(postId).then(() => callback())
-    dispatch({ type: Types.DELETE_POST, postId })
+    API.deletePost(postId).then(() => {
+      dispatch({ type: Types.DELETE_POST, postId })
+    })
   }
 }
 

@@ -5,10 +5,42 @@ import TimeAgo from 'react-timeago'
 import Clock from 'react-icons/lib/fa/clock-o'
 import ThumbsUp from 'react-icons/lib/fa/thumbs-up'
 import ThumbsDown from 'react-icons/lib/fa/thumbs-down'
+import Edit from 'react-icons/lib/fa/edit'
+import Trash from 'react-icons/lib/fa/trash'
 import { Link } from 'react-router-dom'
 import * as Actions from '../../Actions'
+import Modal from 'react-responsive-modal'
+import EditPost from './EditPost'
 
 class Posts extends Component {
+  constructor () {
+    super()
+    this.state = {
+      open: false,
+      postID: 'testing'
+    }
+    this.openModal = this.openModal.bind(this)
+    this.onPostDelete = this.onPostDelete.bind(this)
+  }
+
+  openModal = (postID) => {
+    this.setState({
+      open: true,
+      postID: postID
+    })
+    console.log(postID)
+  }
+
+  closeModal = () => {
+    this.setState({open: false})
+  }
+
+  onPostDelete = (postId) => {
+    console.log(postId)
+    console.log(this.props)
+    this.props.deletePost(postId)
+  }
+
   componentDidMount () {
     this.props.fetchCommentForPost(this.props.post.id)
   }
@@ -17,6 +49,13 @@ class Posts extends Component {
     const {post, comments, fetchAllPosts, likePost} = this.props
     return (
       <div className='postList__item' >
+        <Modal classNames={{overlay: 'custom-overlay', modal: 'custom-modal'}}
+               open={this.state.open} onClose={this.closeModal}
+               little >
+          <div className='modalForm' >
+            <EditPost postID={this.state.postID} onClose={this.closeModal} />
+          </div >
+        </Modal >
         {post && (
           <div className='post' >
             <div className='post__header' >
@@ -54,6 +93,11 @@ class Posts extends Component {
                 <p >{comments && comments ? comments.length : 0}
                   <small >{comments > 1 ? ' Comment' : ' Comments'}</small >
                 </p >
+                <button className='button edit'
+                        onClick={() => this.openModal(post.id)} ><Edit /></button >
+                <button className='button delete'
+                        onClick={() => this.onPostDelete(post.id)} ><Trash />
+                </button >
               </div >
             </div >
           </div >
@@ -70,6 +114,7 @@ function mapStateToProps ({comments}, {post}) {
 }
 
 const mapDispatchToProps = dispatch => ({
+  deletePost: bindActionCreators(Actions.deletePost, dispatch),
   likePost: bindActionCreators(Actions.votePost, dispatch),
   Actions: bindActionCreators(Actions, dispatch),
   fetchCommentForPost: bindActionCreators(Actions.fetchCommentForPost, dispatch),

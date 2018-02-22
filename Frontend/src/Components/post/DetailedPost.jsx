@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import TimeAgo from 'react-timeago'
 import Clock from 'react-icons/lib/fa/clock-o'
@@ -49,9 +50,8 @@ class PostDetail extends Component {
 
   onPostDelete = () => {
     const id = this.props.match.params.postId
-    this.props.deletePost(id, () => {
-      this.props.history.push('/')
-    })
+    this.props.deletePost(id)
+    this.props.history.push('/')
   }
 
   render () {
@@ -125,7 +125,7 @@ class PostDetail extends Component {
                   <button className='button edit'
                           onClick={this.openEditPostModal} ><Edit /></button >
                   <button className='button delete'
-                          onClick={(e) => this.onPostDelete(e)} ><Trash />
+                          onClick={this.onPostDelete} ><Trash />
                   </button >
                   <button className='button shadow' onClick={this.openCommentModal} >
                     <Comment /></button >
@@ -152,5 +152,5 @@ function mapStateToProps ({posts, comments}, {match}) {
   }
 }
 
-export default connect(mapStateToProps,
-  {fetchAllPosts, votePost, deletePost, fetchCommentForPost})(PostDetail)
+export default withRouter(connect(mapStateToProps,
+  {fetchAllPosts, votePost, deletePost, fetchCommentForPost})(PostDetail))
