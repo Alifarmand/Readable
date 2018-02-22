@@ -17,7 +17,7 @@ class Posts extends Component {
     super()
     this.state = {
       open: false,
-      postID: 'testing'
+      postID: ''
     }
     this.openModal = this.openModal.bind(this)
     this.onPostDelete = this.onPostDelete.bind(this)
@@ -28,7 +28,6 @@ class Posts extends Component {
       open: true,
       postID: postID
     })
-    console.log(postID)
   }
 
   closeModal = () => {
@@ -36,8 +35,6 @@ class Posts extends Component {
   }
 
   onPostDelete = (postId) => {
-    console.log(postId)
-    console.log(this.props)
     this.props.deletePost(postId)
   }
 

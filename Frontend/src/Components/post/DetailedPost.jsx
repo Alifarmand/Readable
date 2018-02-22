@@ -1,6 +1,5 @@
 import _ from 'lodash'
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import TimeAgo from 'react-timeago'
 import Clock from 'react-icons/lib/fa/clock-o'
@@ -152,5 +151,5 @@ function mapStateToProps ({posts, comments}, {match}) {
   }
 }
 
-export default withRouter(connect(mapStateToProps,
-  {fetchAllPosts, votePost, deletePost, fetchCommentForPost})(PostDetail))
+export default connect(mapStateToProps,
+  {fetchAllPosts, votePost, deletePost, fetchCommentForPost})(PostDetail)
