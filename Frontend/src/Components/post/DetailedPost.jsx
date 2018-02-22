@@ -8,14 +8,14 @@ import ThumbsDown from 'react-icons/lib/fa/thumbs-down'
 import Comment from 'react-icons/lib/md/comment'
 import Edit from 'react-icons/lib/fa/edit'
 import Trash from 'react-icons/lib/fa/trash'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { fetchCommentForPost } from '../../Actions/comment_actions'
 import { fetchAllPosts, votePost, deletePost } from '../../Actions/post_actions'
 import PostComment from '../comment/PostComments'
 import NewComment from '../comment/CreateComment'
 import EditPost from './EditPost'
 import Modal from 'react-responsive-modal'
-import { PropagateLoader } from 'react-spinners'
+import PageNotFound from '../NotFound'
 
 class PostDetail extends Component {
   constructor () {
@@ -56,11 +56,7 @@ class PostDetail extends Component {
   render () {
     const {post, comments, votePost, fetchAllPosts} = this.props
     if (!post) {
-      return (
-      <div className='spinner'>
-        <PropagateLoader color={'#F2994A'} />
-      </div >
-      )
+      return <PageNotFound />
     }
     return (
       <div className='postList postDetail' >
@@ -69,14 +65,18 @@ class PostDetail extends Component {
                little >
           <div className='modalForm' >
             <h2 >Write a comment</h2 >
-            <NewComment postID={post.id} onClose={this.closeCommentModal} />
+            {post &&
+              <NewComment postID={post.id} onClose={this.closeCommentModal} />
+            }
           </div >
         </Modal >
         <Modal classNames={{overlay: 'custom-overlay', modal: 'custom-modal'}}
                open={this.state.openEditPost} onClose={this.closeEditPostModal}
                little >
           <div className='modalForm' >
+            {post &&
             <EditPost postID={post.id} onClose={this.closeEditPostModal} />
+            }
           </div >
         </Modal >
         {post && (
@@ -151,5 +151,5 @@ function mapStateToProps ({posts, comments}, {match}) {
   }
 }
 
-export default connect(mapStateToProps,
-  {fetchAllPosts, votePost, deletePost, fetchCommentForPost})(PostDetail)
+export default withRouter(connect(mapStateToProps,
+  {fetchAllPosts, votePost, deletePost, fetchCommentForPost})(PostDetail))

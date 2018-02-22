@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import Home from './Components/Index'
 import PostDetail from './Components/post/DetailedPost'
 import Categories from './Components/Categories'
+import PageNotFound from './Components/NotFound'
 import Filter from './Components/Filter'
 
 class Index extends Component {
@@ -27,9 +28,12 @@ class Index extends Component {
           </div >
 
           <Switch className='niggersDieHere'>
-            <Route exact path='/' component={Home} />
+            <Route exact path='/' component={Home}>
+              <Route path='*' component={PageNotFound} />
+            </Route>
             <Route exact path='/:category' component={Home} />
             <Route exact path='/:category/:postId' component={PostDetail} />
+            <Route component={PageNotFound} />
           </Switch >
         </div >
       </div >
