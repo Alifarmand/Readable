@@ -27,7 +27,7 @@ class Index extends Component {
             <Filter />
           </div >
 
-          <Switch className='niggersDieHere'>
+          <Switch>
             <Route exact path='/' component={Home}>
               <Route path='*' component={PageNotFound} />
             </Route>
